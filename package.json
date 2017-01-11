@@ -1,0 +1,23 @@
+{
+  "name": "SmartMirrorServer",
+  "version": "0.0.0",
+  "description": "Handles user data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies":{
+    "express":"*",
+	"body-parser":"*",
+	"mongoose":"*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josephkphan/SmartMirrorServer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephkphan/SmartMirrorServer/issues"
+  }
+}
