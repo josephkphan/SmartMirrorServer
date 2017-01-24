@@ -1,23 +1,27 @@
 {
-  "name": "SmartMirrorServer",
-  "version": "0.0.0",
-  "description": "Handles user data",
-  "main": "index.js",
+  "name": "loginApp",
+  "version": "1.0.0",
+  "description": "simple login app",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "dependencies":{
-    "express":"*",
-	"body-parser":"*",
-	"mongoose":"*"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/josephkphan/SmartMirrorServer.git"
-  },
-  "author": "",
+  "author": "Joseph Phan",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/josephkphan/SmartMirrorServer/issues"
+  "dependencies": {
+  	"bcryptjs" : "*",	
+  	"body-parser" : "*",
+  	"connect-flash" : "*",
+  	"cookie-parser" : "^1.4.1",
+  	"express" : "*",
+  	"express-handlebars" : "*",
+  	"express-messages" : "*",
+  	"express-session" : "*",
+  	"express-validator" : "*",
+  	"mongodb" : "*",
+  	"mongoose" : "*",
+  	"passport" : "*",
+  	"passport-http" : "*",
+  	"passport-local" : "*"
   }
 }

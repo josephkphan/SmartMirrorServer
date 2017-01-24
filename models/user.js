@@ -1,69 +1,48 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
-// --------------------------------User Schema-------------------------------- //
-var userSchema = mongoose.Schema({
-    mirrorID:{
+// User Schema
+var UserSchema = mongoose.Schema({
+    username: {
         type: String,
-        required: true	// required means they must have this
+        index: true
     },
-    password:{
-        type: String,
-        required: true
-    },
-    location:{
+    password: {
         type: String
     },
-    stocks:{
-        type: String,
-        required: true
+    email: {
+        type: String
+    },
+    name: {
+        type: String
     }
 });
 
-// exports out the schema for other files to use
-var User = module.exports = mongoose.model('User', userSchema);
+var User = module.exports = mongoose.model('User', UserSchema);
 
+// all of our user functions
 
-// ------------------------------- Functions ---------------------------------- //
+module.exports.createUser = function (newUser, callback) {
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(newUser.password, salt, function (err, hash) {
+            newUser.password = hash;
+            newUser.save(callback);
+        });
+    });
+}
 
-// Get All Users
-module.exports.getUsers = function(callback,limit){     // what does limit do???
-    User.find(callback).limit(limit);
-}; //todo Remove this later. Just for testing purposes
+module.exports.getUserByUsername = function (username, callback) {
+    var query = {username: username};
+    User.findOne(query, callback);
+}
 
+module.exports.getUserById = function (id, callback) {
+    User.findById(id, callback);
+}
 
-// Get One User by ID
-module.exports.getUserById = function(id, callback){
-    User.findById(id, callback);                        // doesn't need limit because you only return one
-};
-
-
-// Add a User
-module.exports.addUser = function(user,callback){
-    User.create(user,callback);
-};
-
-
-// Update a User
-module.exports.updateUser = function(id,user,options,callback){
-    var query = {_id: id};
-    var update = {
-        mirrorID: user.mirrorID,
-        password: user.password,
-        location: user.location,
-        stocks: user.stocks
-    };
-    //TODO : This will turn everything blank to NULL. USE SET or another way
-    //TODO : to allow user to only update selected fields without losing the rest
-    User.findOneAndUpdate(query, update, options, callback);
-};
-
-
-// Delete a User given an ID
-module.exports.removeUser = function(id,callback){
-    var query = {_id: id};
-    User.remove(query,callback);
-};
-
-
-
-
+module.exports.comparePassword = function (candidatePassword, hash, callback) {
+    bcrypt.compare(candidatePassword, hash, function (err, isMatch) {
+        if (err) throw err;
+        callback(null, isMatch);
+    });
+}
