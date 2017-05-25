@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
+var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var passport = require('passport');
 var User = require('../models/user');
+var configAuth = require('../config/auth');
+
 
 // Register
 router.get('/register', function(req, res){
@@ -15,18 +19,30 @@ router.get('/login', function(req, res){
 	res.render('login');
 });
 
+/////////////////////////////Facebook Route///////////////////////////////////
+router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook/callback',
+passport.authenticate('facebook', { successRedirect: '/',
+failureRedirect: '/login' }));
+
+//////////////////////////////Google Route////////////////////////////////////
+router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/auth/google/callback',
+passport.authenticate('google', { successRedirect: '/',
+failureRedirect: '/login' }));
+
+/////////////////////////////Registration Page//////////////////////////////////
 // Register User
 router.post('/register', function(req, res){
 	var name = req.body.name;
-	var email = req.body.email;
+	var mirrorID = req.body.mirrorID;
 	var username = req.body.username;
 	var password = req.body.password;
 	var password2 = req.body.password2;
 
-	// Validation
+	// Validation - Checks if user filled out the form correctly
 	req.checkBody('name', 'Name is required').notEmpty();
-	req.checkBody('email', 'Email is required').notEmpty();
-	req.checkBody('email', 'Email is not valid').isEmail();
+	req.checkBody('mirrorID', 'MirrorID is required').notEmpty();
 	req.checkBody('username', 'Username is required').notEmpty();
 	req.checkBody('password', 'Password is required').notEmpty();
 	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
@@ -35,13 +51,15 @@ router.post('/register', function(req, res){
 	var errors = req.validationErrors();
 
 	if(errors){
-		res.render('register',{		// shows the errors
+		res.render('register',{
+			// shows the errors
 			errors:errors
 		});
 	} else {
+		// account created successful! creating new user data structure
 		var newUser = new User({
 			name: name,
-			email:email,
+			mirrorID:mirrorID,
 			username: username,
 			password: password
 		});
@@ -56,42 +74,118 @@ router.post('/register', function(req, res){
 		res.redirect('/users/login');
 	}
 });
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-   User.getUserByUsername(username, function(err, user){
-   	if(err) throw err;
-   	if(!user){
-   		return done(null, false, {message: 'Unknown User'});
-   	}
-
-   	User.comparePassword(password, user.password, function(err, isMatch){
-   		if(err) throw err;
-   		if(isMatch){
-   			return done(null, user);
-   		} else {
-   			return done(null, false, {message: 'Invalid password'});
-   		}
-   	});
-   });
-  }));
+/////////////////////////////Serialization ///////////////////////////////////
 
 passport.serializeUser(function(user, done) {
-  done(null, user.id);
+	done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
+	User.getUserById(id, function(err, user) {
+		done(err, user);
+	});
 });
 
-router.post('/login',
-  passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
-  function(req, res) {
-    res.redirect('/');
-  });
+////////////////////////////Login Strategies//////////////////////////////////
+// Local Login - Users created their own account from our website
+passport.use(new LocalStrategy(
+	function(username, password, done) {
+		// Checks if user info is correct
+		User.getUserByUsername(username, function(err, user){
+			// Checks username
+			if(err) throw err;
+			if(!user){
+				// Wasn't found. display error message
+				return done(null, false, {message: 'Incorrect Username or Password'});
+			}
+			//Check password for correct username
+			User.comparePassword(password, user.password, function(err, isMatch){
+				if(err) throw err;
+				if(isMatch){
+					// Success! get the user
+					return done(null, user);
+				} else {
+					// Failed! display error message
+					return done(null, false, {message: 'Incorrect Username or Password'});
+				}
+			});
+		});
+	}));
 
+// Facebook Login
+passport.use(new FacebookStrategy({
+	// Passing in API Keys
+	clientID: configAuth.facebookAuth.clientID,
+	clientSecret: configAuth.facebookAuth.clientSecret,
+	callbackURL: configAuth.facebookAuth.callbackURL},
+	function(accessToken, refreshToken, profile, done) {
+		process.nextTick(function(){
+			User.findOne({'facebook.id': profile.id}, function(err, user){
+				// Checks whether user used his login for facebook already
+				if(err)
+					// got an error
+					return done(err);
+				if(user)
+					// got back the user
+					return done(null, user);
+				else {
+					// Create a new User
+					var newUser = new User();
+					newUser.facebook.id = profile.id;
+					newUser.facebook.token = accessToken;
+					newUser.facebook.name = profile.displayName+ ' ' + profile.name.familyName;
+					User.createUser(newUser, function(err, user){
+						if(err) throw err;
+						console.log(user);
+					});
+					console.log(profile);
+				}
+			});
+		});
+	}
+));
+
+// Google Logn
+passport.use(new GoogleStrategy({
+	// Get the API Keys
+	clientID: configAuth.googleAuth.clientID,
+	clientSecret: configAuth.googleAuth.clientSecret,
+	callbackURL: configAuth.googleAuth.callbackURL },
+	function(accessToken, refreshToken, profile, done) {
+		process.nextTick(function(){
+			User.findOne({'google.id': profile.id}, function(err, user){
+				if(err)
+					// error
+					return done(err);
+				if(user)
+					// user found! return user
+					return done(null, user);
+				else {
+					// first time login with google account
+					var newUser = new User();
+					newUser.google.id = profile.id;
+					newUser.google.token = accessToken;
+					newUser.google.name = profile.displayName;
+
+					User.createUser(newUser, function(err, user){
+						if(err) throw err;
+						console.log(user);
+					});
+					console.log(profile);
+				}
+			});
+		});
+	}
+));
+
+/////////////////////////////Login Route////////////////////////////////////////
+router.post('/login',
+passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
+function(req, res) {
+	res.redirect('/');
+});
+
+////////////////////////////Log out Route////////////////////////////////
 router.get('/logout', function(req, res){
 	req.logout();
 
@@ -101,3 +195,15 @@ router.get('/logout', function(req, res){
 });
 
 module.exports = router;
+
+//------------------------------ Test Code -------------------------------------
+var newUser = new User(); // Create a new User
+newUser.name = "test"
+User.createUser(newUser, function(err, user){
+    if(err) throw err;
+    console.log(user);
+});
+User.addToDoListItem(newUser, "Get this working", function(err, user) {
+	if (err) console.log("error :(");
+	console.log(user);
+});

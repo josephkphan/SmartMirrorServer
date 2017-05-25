@@ -12,7 +12,9 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/loginapp');
+var configDB = require('./config/database.js');
+mongoose.Promise = global.Promise;
+mongoose.connect(configDB.url);
 var db = mongoose.connection;
 
 var routes = require('./routes/index');
@@ -26,7 +28,7 @@ app.set('views', path.join(__dirname, 'views'));  // we want a folder views to h
 app.engine('handlebars', exphbs({defaultLayout:'layout'})); //default layout file in layout
 app.set('view engine', 'handlebars'); //set viewengine to handlebars
 
-// BodyParser Middleware   -  setup code, configurations 
+// BodyParser Middleware   -  setup code, configurations
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -66,7 +68,7 @@ app.use(expressValidator({
 // Connect Flash
 app.use(flash());
 
-// Global Vars		- used for our flash messages 
+// Global Vars		- used for our flash messages
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');

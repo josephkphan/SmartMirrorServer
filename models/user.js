@@ -1,27 +1,42 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
+
 // User Schema
 var UserSchema = mongoose.Schema({
     username: {
         type: String,
-        index: true
+        //index: true
     },
     password: {
         type: String
     },
-    email: {
+    mirrorID: {
         type: String
     },
     name: {
         type: String
-    }
+    },
+    toDo: {
+        type: String
+    },
+    facebook:{
+        id: String,
+        token: String,
+        name: String
+    },
+    google: {
+		id: String,
+		token: String,
+		name: String
+	}
 });
+
 
 var User = module.exports = mongoose.model('User', UserSchema);
 
-// all of our user functions
 
+// Functions for user data
 module.exports.createUser = function (newUser, callback) {
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(newUser.password, salt, function (err, hash) {
@@ -45,4 +60,9 @@ module.exports.comparePassword = function (candidatePassword, hash, callback) {
         if (err) throw err;
         callback(null, isMatch);
     });
+}
+
+module.exports.addToDoListItem = function (user, toDoListItem, callback) {
+    user.toDo = toDoListItem;
+    user.save(callback);
 }
