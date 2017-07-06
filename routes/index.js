@@ -3,7 +3,10 @@ var router = express.Router();
 
 ///////////////////////////////// Index Route///////////////////////////////
 router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
+	console.log(req.user._id);
+	console.log(req.user.name);
+	console.log(req.user.username);
+	res.render('index', req.user);
 	//display dashboard
 });
 
