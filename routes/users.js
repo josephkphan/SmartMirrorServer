@@ -8,7 +8,6 @@ var passport = require('passport');
 var User = require('../models/user');
 var configAuth = require('../config/auth');
 
-
 // Register
 router.get('/register', function(req, res){
 	res.render('register');
@@ -103,6 +102,8 @@ passport.use(new LocalStrategy(
 				if(err) throw err;
 				if(isMatch){
 					// Success! get the user
+					const util = require('util');
+					console.log(util.inspect(user, false, null));
 					return done(null, user);
 				} else {
 					// Failed! display error message
@@ -182,6 +183,8 @@ passport.use(new GoogleStrategy({
 router.post('/login',
 passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
 function(req, res) {
+	console.log("THIS SHOULD PRINT");
+	console.log(util.inspect(res));
 	res.redirect('/');
 });
 
@@ -197,13 +200,21 @@ router.get('/logout', function(req, res){
 module.exports = router;
 
 //------------------------------ Test Code -------------------------------------
-var newUser = new User(); // Create a new User
-newUser.name = "test"
-User.createUser(newUser, function(err, user){
-    if(err) throw err;
-    console.log(user);
-});
-User.addToDoListItem(newUser, "Get this working", function(err, user) {
-	if (err) console.log("error :(");
-	console.log(user);
-});
+// const util = require('util')
+
+// alternative shortcut
+// console.log(util.inspect(newUser, false, null));
+console.log('-----------');
+// console.log(util.inspect(User.User, false, null));
+
+// var newUser = new User(); // Create a new User
+// newUser.name = "Joseph K Phan"
+// User.createUser(newUser, function(err, user){
+//     if(err) throw err;
+//     console.log(user);
+// });
+//
+// User.addToDoListItem(newUser, "Demo", function(err, user) {
+// 	if (err) console.log("error :(");
+// 	console.log(user);
+// });

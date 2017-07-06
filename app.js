@@ -12,6 +12,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
 
+// Connection to the database
 var configDB = require('./config/database.js');
 mongoose.Promise = global.Promise;
 mongoose.connect(configDB.url);
