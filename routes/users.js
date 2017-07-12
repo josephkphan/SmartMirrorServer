@@ -135,6 +135,8 @@ passport.use(new FacebookStrategy({
 					newUser.facebook.id = profile.id;
 					newUser.facebook.token = accessToken;
 					newUser.facebook.name = profile.displayName+ ' ' + profile.name.familyName;
+					newUser.name = profile.displayName+ ' ' + profile.name.familyName;
+
 					User.createUser(newUser, function(err, user){
 						if(err) throw err;
 						console.log(user);
@@ -167,6 +169,7 @@ passport.use(new GoogleStrategy({
 					newUser.google.id = profile.id;
 					newUser.google.token = accessToken;
 					newUser.google.name = profile.displayName;
+					newUser.name = profile.displayName+ ' ' + profile.name.familyName;
 
 					User.createUser(newUser, function(err, user){
 						if(err) throw err;
@@ -204,7 +207,6 @@ module.exports = router;
 
 // alternative shortcut
 // console.log(util.inspect(newUser, false, null));
-console.log('-----------');
 // console.log(util.inspect(User.User, false, null));
 
 // var newUser = new User(); // Create a new User
