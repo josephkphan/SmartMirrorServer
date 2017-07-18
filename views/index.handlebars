@@ -4,47 +4,120 @@
     <!-- LOCAL INFORMATION -->
     <div class="col-sm-6">
         <div class="well">
-            <h3><span class="fa fa-user"></span> Hello {{ user.name }} </h3>
+            <h3><span class="fa fa-user"></span> Hello "{{ user.name }}" </h3>
             <form method="post" action="/">
                 <div class="form-group">
-                    <input type="hidden" name="_id" value={{user._id}}>
-                    <input type="hidden" name="username" value={{user.username}}>
+                    <input type="hidden" name="_id" value="{{user._id}}">
 
                     <!--TODO make placeholder current data-->
                     <!--TODO place input on the same line as the label-->
+                    <!--TODO Change password option???-->
 
 
+                    <!--General Information-->
+                    <label>Name</label>
+                    <input type="text" class="form-control" placeholder="{{user.name}}" name="name">
+
+                    <label>Mirror ID</label>
+                    <input type="text" class="form-control" placeholder="{{user.mirrorID}}" name="mirrorID">
+
+
+                    <!-- Api Keys -->
+                    <br><br><label>API Keys</label><br>
+                    <label>Google Distance Matrix</label>
+                    <input type="text" class="form-control" placeholder="{{user.google_distance_matrix_key}}" name="google_distance_matrix_key">
+
+                    <label>Google Geocode</label>
+                    <input type="text" class="form-control" placeholder="{{user.google_geocode_key}}" name="google_geocode_key">
+
+                    <label>Dark Sky Weather</label>
+                    <input type="text" class="form-control" placeholder="{{user.dark_sky_weather_key}}" name="dark_sky_weather_key">
+
+
+                    <!-- To do List-->
+                    <br><br>
                     <label>To Do List</label>
                     <input type="text" class="form-control" placeholder="Eat In n Out" name="new_todolist">
-                    <input type="hidden" name="location" value={{user.todolist}}>
 
+
+                    <!--Stocks-->
+                    <br><br>
                     <label>Stocks</label>
                     <input type="text" class="form-control" placeholder="APL" name="new_stocks">
-                    <input type="hidden" name="location" value={{user.stocks}}>
+
+
+                    <!-- Maps -->
+                    <br><br>
+                    <Label>Home Address</Label>
+                    <br>
+
+                    <label>Street</label>
+                    <input type="text" class="form-control" placeholder="{{user.maps_origin_street_address}}" name="maps_origin_street_address">
+
+                    <label>City</label>
+                    <input type="text" class="form-control" placeholder="{{user.maps_origin_city_address}}" name="maps_origin_city_address">
+
+                    <label>State</label>
+                    <input type="text" class="form-control" placeholder="{{user.maps_origin_state_address}}" name="maps_origin_state_address">
+
 
                     <br><br>
-                    <label>Location</label>
-                    <input type="text" class="form-control" placeholder={{user.map}} name="new_maps.origin.city_address">
-                    <input type="hidden" name="location" value={{user.maps.origin.city_address}}>
+                    <label>Work Address</label>
+                    <br>
+                    <label>Street</label>
+                    <input type="text" class="form-control" placeholder="{{user.maps_destination_street_address}}" name="maps_destination_street_address">
 
-                    <label>Name</label>
-                    <input type="text" class="form-control" placeholder={{user.name}} name="new_name">
-                    <input type="hidden" name="name" value={{user.name}}>
+                    <label>City</label>
+                    <input type="text" class="form-control" placeholder="{{user.maps_destination_city_address}}" name="maps_destination_city_address">
 
-                    <label>Color</label>
-                    <select name="color">
+                    <label>State</label>
+                    <input type="text" class="form-control" placeholder="{{user.maps_destination_state_address}}" name="maps_destination_state_address">
+
+                    <br><br>
+                    <label>Google Map Settings</label>
+                    <br>
+                    <label>Avoid Tolls : "{{user.maps_settings_avoid_tolls}}"</label>
+                    <br>
+                    <select name="maps_settings_avoid_tolls">
+                        <option value="" disabled selected>Select your option</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+
+                    <label>Mode: "{{user.maps_settings_mode}}"</label>
+                    <br>
+                    <select name="maps_settings_mode">
+                        <option value="" disabled selected>Select your option</option>
                         <option value="blue">Blue</option>
                         <option value="red">Red</option>
                     </select>
-                    <input type="hidden" name="color" value={{user.color}}>
 
-                    <label>Font Size</label>
-                    <select name="fontSize">
+                    <label>Transit Mode: "{{user.maps_settings_transit_mode}}"</label>
+                    <br>
+                    <select name="maps_settings_transit_mode">
+                        <option value="" disabled selected>Select your option</option>
+                        <option value="car">Car</option>
+                        <option value="subway">Subway</option>
+                    </select>
+
+
+                    <!-- Mirror Settings-->
+
+                    <label>Color: "{{user.color}}"</label>
+                    <select name="color">
+                        <option value="" disabled selected>Select your option</option>
+                        <option value="blue">Blue</option>
+                        <option value="red">Red</option>
+                    </select>
+
+                    <label>Font Size: "{{user.fontSize}}"</label>
+                    <select name="fontSize"  >
+                        <option value="" disabled selected>Select your option</option>
                         <option value="large">Large</option>
                         <option value="medium">Medium</option>
                         <option value="small">Small</option>
                     </select>
-                    <input type="hidden" name="fontSize" value={{user.fontSize}}>
+                    
                 </div>
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>

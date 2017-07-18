@@ -60,7 +60,30 @@ router.post('/register', function(req, res){
 			name: name,
 			mirrorID:mirrorID,
 			username: username,
-			password: password
+			password: password,
+
+            google_distance_matrix_key: 'google_distance_matrix_key',
+            google_geocode_key: 'google_geocode_key',
+            dark_sky_weather_key: 'dark_sky_weather_key',
+
+            maps_origin_street_address : 'street',
+            maps_origin_city_address : 'city',
+            maps_origin_state_address : 'state initials',
+
+            maps_destination_street_address : 'street',
+            maps_destination_city_address : 'city',
+            maps_destination_state_address : 'state initials',
+
+            maps_settings_avoid_tolls : false,
+            maps_settings_mode : String,
+            maps_settings_transit_mode : String,
+
+            color: 'yellow',    //TODO This should be the default value?
+            fontSize: 'medium'  //TODO Same? ^
+
+			//TODO Make this the default for facebook and other one too
+
+
 		});
 
 		User.createUser(newUser, function(err, user){

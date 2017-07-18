@@ -12,13 +12,11 @@ router.get('/', ensureAuthenticated, function(req, res){
 });
 
 router.post('/', function(req, res) {
-	console.log("----------------------");
-	console.log(req.body);
 	req.flash('success_msg', 'Updated Profile');
 
 	res.redirect('/');
 
-	User.updateUser(req.body._id, {});
+	User.updateUser(req.body);
 
 
 	// Create the new user with updated information
