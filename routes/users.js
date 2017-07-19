@@ -79,11 +79,12 @@ router.post('/register', function(req, res){
             maps_settings_transit_mode : String,
 
             color: 'yellow',    //TODO This should be the default value?
-            fontSize: 'medium'  //TODO Same? ^
+            fontSize: 'medium',  //TODO Same? ^
+
+			to_do_list: 'a////b////c',
+			stocks: ''
 
 			//TODO Make this the default for facebook and other one too
-
-
 		});
 
 		User.createUser(newUser, function(err, user){

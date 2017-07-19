@@ -14,6 +14,8 @@ router.get('/', ensureAuthenticated, function(req, res){
 router.post('/', function(req, res) {
 	req.flash('success_msg', 'Updated Profile');
 
+	console.log(req.body);
+
 	res.redirect('/');
 
 	User.updateUser(req.body);

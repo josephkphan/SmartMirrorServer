@@ -28,8 +28,8 @@ var UserSchema = mongoose.Schema({
     },
 
     // Mirror Widget Information
-    to_do_list: [String],
-    stocks: [String],
+    to_do_list: String,
+    stocks: String,
 
     maps_origin_street_address: String,
     maps_origin_city_address: String,
