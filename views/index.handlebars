@@ -39,10 +39,22 @@
                     </ul>
 
 
-                    <!--Stocks-->
+                    <!-- Stocks  -->
                     <br><br>
-                    <label>Stocks</label>
-                    <input type="text" class="form-control" placeholder="APL" name="new_stocks">
+                    <label>My Stocks</label>
+                    <input type="text" class="form-control" placeholder="Eat In n Out" name="new_stocks">
+                    <input type="hidden" name="stocks" id="stocks"  value="{{user.stocks}}">
+
+                    <div id="myDIV" class="header">
+                        <h2>My Stocks</h2>
+
+                        <input type="text" id="stock_input" placeholder="Title...">
+                        <span onclick="newStockElement()" class="addBtn">Add</span>
+                    </div>
+
+                    <ul id="stock_UL">
+                    </ul>
+
 
 
                     <!-- Maps -->
@@ -142,16 +154,19 @@
 <!--These scripts will be used to add list items to "todolist" and "stocks"-->
 <script>
     // Create a "close" button and append it to each list item
-    var myNodelist = document.getElementsByTagName("LI");
-    var i;
-    for (i = 0; i < myNodelist.length; i++) {
-        var span = document.createElement("SPAN");
-//        TODO CANNOT CLOSE DASHBOARD AND LOGOUT
-        var txt = document.createTextNode("\u00D7");
-        span.className = "close";
-        span.appendChild(txt);
-        myNodelist[i].appendChild(span);
-    }
+//    var myNodelist = document.getElementsByTagName("LI");
+//    var i;
+//    for (i = 0; i < myNodelist.length; i++) {
+//        if(String(myNodelist[i]).includes('presentation')){
+//            console.log(myNodelist[i])
+//        }
+//        var span = document.createElement("SPAN");
+////        TODO CANNOT CLOSE DASHBOARD AND LOGOUT
+//        var txt = document.createTextNode("\u00D7");
+//        span.className = "close";
+//        span.appendChild(txt);
+//        myNodelist[i].appendChild(span);
+//    }
 
     // Click on a close button to hide the current list item
     var close = document.getElementsByClassName("close");
@@ -192,7 +207,7 @@
         var t = document.createTextNode(inputValue);
         li.appendChild(t);
         if (inputValue === '') {
-            alert("You must write something!");
+//            alert("You must write something!");
         } else {
             document.getElementById("myUL").appendChild(li);
         }
@@ -203,7 +218,6 @@
         span.appendChild(txt);
         li.appendChild(span);
         var input = document.createElement("input");
-        var t2 = document.createTextNode(inputValue);
 
         // Remove the item from the list when clicked
         for (i = 0; i < close.length; i++) {
@@ -224,6 +238,79 @@
                             document.getElementById("to_do_list").value += (to_do_item);  // First one cannot have "////"  i.e.   a////b////c
                         } else {
                             document.getElementById("to_do_list").value += ('////' + to_do_item);
+                        }
+                    }
+                });
+
+            }
+        }
+    }
+</script>
+
+<!------------------------------------------------------------------------------------------------------------------->
+
+<!--These scripts will be used to add list items to "STOCKS" and "stocks"-->
+<script>
+    // Create list of existing to do items
+    var prev_stocks = document.getElementById("stocks").value.split("////");
+    prev_stocks.forEach(function(stock) {
+        newStockElement(stock);
+        console.log(stock);
+    });
+
+    // Create a new list item when clicking on the "Add" button
+    function newStockElement(string) {
+        var li = document.createElement("li");
+        var inputValue;
+
+        // Check to see if an input value is being passed to this function
+        if (string) {
+            inputValue = string;  // Create Todo list from Database
+        } else {
+            inputValue = document.getElementById("stock_input").value;  // Added from the UI
+            if (document.getElementById("stocks").value  == '') {
+                document.getElementById("stocks").value += ( inputValue);  // First one cannot have "////"  i.e.   a////b////c
+            } else {
+                document.getElementById("stocks").value += ('////' + inputValue);
+            }
+        }
+
+        // Retrieve information from the HTML form (FOUND THIS STUFF ONLINE)
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+//            alert("You must write something!");
+        } else {
+            document.getElementById("stock_UL").appendChild(li);
+        }
+        document.getElementById("myInput").value = "";
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        li.appendChild(span);
+        var input = document.createElement("input");
+        var t2 = document.createTextNode(inputValue);
+
+        // Remove the item from the list when clicked
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                // Make the HTML element disappear
+                var div = this.parentElement;
+                var removed_string = div.innerHTML.split('<span')[0];
+                div.style.display = "none";
+
+                // Retrieve the current list of elements from the database
+                var prev_stocks = document.getElementById("stocks").value.split("////");
+
+                // Recreate the list of current elements but do not include item to be removed
+                document.getElementById("stocks").value = '';
+                prev_stocks.forEach(function(stock) {
+                    if(stock !== removed_string){
+                        if (document.getElementById("stocks").value == ''){
+                            document.getElementById("stocks").value += (stock);  // First one cannot have "////"  i.e.   a////b////c
+                        } else {
+                            document.getElementById("stocks").value += ('////' + stock);
                         }
                     }
                 });
