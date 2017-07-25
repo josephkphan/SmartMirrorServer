@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var path = require('path');
 
 ///////////////////////////////// Index Route///////////////////////////////
 router.get('/', ensureAuthenticated, function(req, res){
@@ -8,6 +9,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 	console.log(req.user.name);
 	console.log(req.user.username);
 	res.render('index', req.user);
+	// res.sendFile(path.join(__dirname + '/dashboard.html'));
 	//display dashboard
 });
 

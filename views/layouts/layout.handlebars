@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Smart Mirror</title>
+	<!--<title>Smart Mirror</title>-->
 	<link rel="stylesheet" href="/css/bootstrap.css" />
 	<link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-	<div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            {{#if user}}
-              <li role="presentation"><a href="/">Dashboard</a></li>
-              <li role="presentation"><a href="/users/logout">Logout</a></li>
-            {{else}}
-              <li role="presentation"><a href="/users/login">Login</a></li>  
-              <li role="presentation"><a href="/users/register">Register</a></li>
-            {{/if}}
-          </ul>
-        </nav>
-        <h3 class="text-muted">My Smart Mirror</h3>
-      </div>
+	<!--<div class="container">-->
+      <!--<div class="header clearfix">-->
+        <!--<nav>-->
+          <!--<ul class="nav nav-pills pull-right">-->
+            <!--{{#if user}}-->
+              <!--<li role="presentation"><a href="/">Dashboard</a></li>-->
+              <!--<li role="presentation"><a href="/users/logout">Logout</a></li>-->
+            <!--{{else}}-->
+              <!--<li role="presentation"><a href="/users/login">Login</a></li>-->
+              <!--<li role="presentation"><a href="/users/register">Register</a></li>-->
+            <!--{{/if}}-->
+          <!--</ul>-->
+        <!--</nav>-->
+        <!--<h3 class="text-muted">My Smart Mirror</h3>-->
+      <!--</div>-->
 
 
       <div class="row">
@@ -36,17 +36,17 @@
           {{#if error}}
             <div class="alert alert-danger">{{error}}</div>
           {{/if}}
-          
+
           {{{body}}}
         </div>
 
-        
+
       </div>
 
-      <footer class="footer">
-        <p>&copy; 2017 Smart Mirror</p>
-      </footer>
+      <!--<footer class="footer">-->
+        <!--<p>&copy; 2017 Smart Mirror</p>-->
+      <!--</footer>-->
 
-    </div> <!-- /container -->
+    <!--</div> &lt;!&ndash; /container &ndash;&gt;-->
 </body>
 </html>
