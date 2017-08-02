@@ -9,7 +9,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 	console.log(req.user.name);
 	console.log(req.user.username);
 	res.render('index', req.user);
-	// res.sendFile(path.join(__dirname + '/dashboard.html'));
+	// res.sendFile(path.join(__dirname + '/home.html'));
 	//display dashboard
 });
 
