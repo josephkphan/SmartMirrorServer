@@ -3,76 +3,103 @@ var router = express.Router();
 var User = require('../models/user');
 var path = require('path');
 
-///////////////////////////////// Index Route///////////////////////////////
+// Index Page
 router.get('/', ensureAuthenticated, function(req, res){
-	console.log(req.user._id);
-	console.log(req.user.name);
-	console.log(req.user.username);
-	res.render('index', req.user);
-	// res.sendFile(path.join(__dirname + '/home.html'));
-	//display dashboard
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('home', req.user);
+    // res.sendFile(path.join(__dirname + '/home.html'));
+    //display dashboard
 });
 
 router.post('/', function(req, res) {
-	req.flash('success_msg', 'Updated Profile');
+    req.flash('success_msg', 'Updated Profile');
+    res.redirect('/');
+    User.updateUser(req.body);
 
-
-	res.redirect('/');
-
-	User.updateUser(req.body);
-
-
-	// Create the new user with updated information
-	// var newUser = new User({
-	// 	_id: req.body._id,
-	// 	name: req.body.new_name
-	// });
-    //
-	// User.createUser(newUser, function(err, user){
-	// 	if(err) throw err;
-	// 	console.log(user);
-	// });
-
-	// var name = req.body.name;
-	// var mirrorID = req.body.mirrorID;
-	// var username = req.body.username;
-	// var password = req.body.password;
-	// var password2 = req.body.password2;
-    //
-	// // Validation - Checks if user filled out the form correctly
-	// req.checkBody('name', 'Name is required').notEmpty();
-	// req.checkBody('mirrorID', 'MirrorID is required').notEmpty();
-	// req.checkBody('username', 'Username is required').notEmpty();
-	// req.checkBody('password', 'Password is required').notEmpty();
-	// req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-	// // checks to make sure passwords match and all fields are filled in
-    //
-	// var errors = req.validationErrors();
-    //
-	// if(errors){
-	// 	res.render('register',{
-	// 		// shows the errors
-	// 		errors:errors
-	// 	});
-	// } else {
-	// 	// account created successful! creating new user data structure
-	// 	var newUser = new User({
-	// 		name: name,
-	// 		mirrorID:mirrorID,
-	// 		username: username,
-	// 		password: password
-	// 	});
-    //
-	// 	User.createUser(newUser, function(err, user){
-	// 		if(err) throw err;
-	// 		console.log(user);
-	// 	});
-    //
-	// 	req.flash('success_msg', 'You are registered and can now login');
-    //
-	// 	res.redirect('/users/login');
-	// }
 });
+
+//Home
+router.get('/home', ensureAuthenticated, function(req, res){
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('home', req.user);
+});
+
+router.post('/home', function(req, res) {
+    req.flash('success_msg', 'Updated Stocks & Reminders');
+    res.redirect('/home');
+    User.updateUser(req.body);
+});
+
+//User
+router.get('/user', ensureAuthenticated, function(req, res){
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('user', req.user);
+});
+
+router.post('/user', function(req, res) {
+    req.flash('success_msg', 'Updated Profile');
+    res.redirect('/user');
+    User.updateUser(req.body);
+});
+
+//Maps
+router.get('/maps', ensureAuthenticated, function(req, res){
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('maps', req.user);
+});
+
+router.post('/maps', function(req, res) {
+    req.flash('success_msg', 'Updated Location');
+    res.redirect('/maps');
+    User.updateUser(req.body);
+});
+
+//Api Keys
+router.get('/apikeys', ensureAuthenticated, function(req, res){
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('apikeys', req.user);
+});
+
+router.post('/apikeys', function(req, res) {
+    req.flash('success_msg', 'Updated Api Keys');
+    res.redirect('/apikeys');
+    User.updateUser(req.body);
+
+});
+
+//Settings Page
+router.get('/settings', ensureAuthenticated, function(req, res){
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('settings', req.user);
+});
+
+router.post('/', function(req, res) {
+    req.flash('success_msg', 'Updated Settings');
+    res.redirect('/');
+    User.updateUser(req.body);
+
+});
+
+// Support Page
+router.get('/support', ensureAuthenticated, function(req, res){
+    console.log(req.user._id);
+    console.log(req.user.name);
+    console.log(req.user.username);
+    res.render('support', req.user);
+});
+
 
 // Redirects user if they arent authenticated to login page
 function ensureAuthenticated(req, res, next){
