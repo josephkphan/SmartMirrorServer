@@ -10,7 +10,7 @@ var configAuth = require('../config/auth');
 
 // Register
 router.get('/register', function(req, res){
-	res.render('register');
+	res.render('login');
 });
 
 // Login
@@ -50,8 +50,9 @@ router.post('/register', function(req, res){
 	var errors = req.validationErrors();
 
 	if(errors){
-		res.render('register',{
+		res.render('login',{
 			// shows the errors
+
 			errors:errors
 		});
 	} else {
@@ -210,7 +211,6 @@ passport.use(new GoogleStrategy({
 router.post('/login',
 passport.authenticate('local', {successRedirect:'/', failureRedirect:'/users/login',failureFlash: true}),
 function(req, res) {
-	console.log("THIS SHOULD PRINT");
 	console.log(util.inspect(res));
 	res.redirect('/');
 });
