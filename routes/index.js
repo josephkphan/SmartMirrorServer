@@ -5,9 +5,7 @@ var path = require('path');
 
 // Index Page
 router.get('/', ensureAuthenticated, function(req, res){
-    console.log(req.user._id);
-    console.log(req.user.name);
-    console.log(req.user.username);
+    console.log('Load Index Page');
     res.render('home', req.user);
     // res.sendFile(path.join(__dirname + '/home.html'));
     //display dashboard
@@ -22,72 +20,67 @@ router.post('/', function(req, res) {
 
 //Home
 router.get('/home', ensureAuthenticated, function(req, res){
-    console.log(req.user._id);
-    console.log(req.user.name);
-    console.log(req.user.username);
+    console.log('Load Home Page');
     res.render('home', req.user);
 });
 
 router.post('/home', function(req, res) {
     req.flash('success_msg', 'Updated Stocks & Reminders');
     res.redirect('/home');
+    console.log('** Post Home Page');
     User.updateUser(req.body);
 });
 
 //User
 router.get('/user', ensureAuthenticated, function(req, res){
-    console.log(req.user._id);
-    console.log(req.user.name);
-    console.log(req.user.username);
+    console.log('Load User Profile Page');
     res.render('user', req.user);
 });
 
 router.post('/user', function(req, res) {
     req.flash('success_msg', 'Updated Profile');
+    console.log('** Post User Profile Page');
     res.redirect('/user');
     User.updateUser(req.body);
 });
 
 //Maps
 router.get('/maps', ensureAuthenticated, function(req, res){
-    console.log(req.user._id);
-    console.log(req.user.name);
-    console.log(req.user.username);
+    console.log('Load Maps Page');
     res.render('maps', req.user);
 });
 
 router.post('/maps', function(req, res) {
     req.flash('success_msg', 'Updated Location');
+    console.log('** Post Maps Page');
     res.redirect('/maps');
     User.updateUser(req.body);
 });
 
 //Api Keys
 router.get('/apikeys', ensureAuthenticated, function(req, res){
-    console.log(req.user._id);
-    console.log(req.user.name);
-    console.log(req.user.username);
+    console.log('Load Api Keys Page');
     res.render('apikeys', req.user);
 });
 
 router.post('/apikeys', function(req, res) {
     req.flash('success_msg', 'Updated Api Keys');
+    console.log('** Post Api Keys Page');
     res.redirect('/apikeys');
+    console.log(req.body);
     User.updateUser(req.body);
-
 });
 
 //Settings Page
 router.get('/settings', ensureAuthenticated, function(req, res){
-    console.log(req.user._id);
-    console.log(req.user.name);
-    console.log(req.user.username);
+    console.log('Load Settings Page');
     res.render('settings', req.user);
 });
 
-router.post('/', function(req, res) {
+router.post('/settings', function(req, res) {
     req.flash('success_msg', 'Updated Settings');
-    res.redirect('/');
+    console.log('** Post Settings Page');
+    res.redirect('/settings');
     User.updateUser(req.body);
 
 });

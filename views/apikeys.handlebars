@@ -166,12 +166,14 @@
                                 <h4 class="title">Api Keys</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form method="post" action="/apikeys">
+                                    <input type="hidden" name="_id" value="{{user._id}}">
+
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Weather Key</label>
-                                                <input type="text" class="form-control" placeholder="please fill this in" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.dark_sky_weather_key}}"  name="dark_sky_weather_key">
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +182,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Google Geocode Key</label>
-                                                <input type="text" class="form-control" placeholder="please fill this in" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.google_geocode_key}}" name="google_geocode_key">
                                             </div>
                                         </div>
                                     </div>
@@ -189,7 +191,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Google Distance Matrix Key</label>
-                                                <input type="text" class="form-control" placeholder="please fill this in" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.google_distance_matrix_key}}" name="google_distance_matrix_key">
                                             </div>
                                         </div>
                                     </div>

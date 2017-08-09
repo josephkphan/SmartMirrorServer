@@ -164,12 +164,13 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form method="post" action="/user">
+                                    <input type="hidden" name="_id" value="{{user._id}}">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Username</label>
-                                                <input type="text" class="form-control" placeholder="Username" value="">
+                                                <input type="text" class="form-control" disabled placeholder="{{user.username}}" name="username">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -181,7 +182,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" placeholder="Email">
+                                                <input type="email" class="form-control" placeholder="{{user.email}}" name="email">
                                             </div>
                                         </div>
                                     </div>
@@ -190,7 +191,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mirror ID</label>
-                                                <input type="text" class="form-control" placeholder="1234" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.mirrorID}}" name="mirrorID">
                                             </div>
                                         </div>
                                     </div>
@@ -199,13 +200,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="test_first_name" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.firstname}}" name="firstname">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="test_last_name" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.lastname}}" name="lastname">
                                             </div>
                                         </div>
                                     </div>
@@ -214,7 +215,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Address</label>
-                                                <input type="text" class="form-control" placeholder="Home_Address" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.maps_origin_street_address}}" name="maps_origin_street_address">
                                             </div>
                                         </div>
                                     </div>
@@ -223,19 +224,19 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <input type="text" class="form-control" placeholder="City" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.maps_origin_city_address}}" name="maps_origin_city_address">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Country</label>
-                                                <input type="text" class="form-control" placeholder="Country" value="">
+                                                <input type="text" class="form-control" placeholder="{{user.maps_origin_state_address}}" name="maps_origin_state_address">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label>Postal Code</label>
-                                                <input type="number" class="form-control" placeholder="ZIP Code">
+                                                <input type="number" class="form-control" placeholder="{{user.maps_origin_zipcode_address}}" name="maps_origin_zipcode_address">
                                             </div>
                                         </div>
                                     </div>

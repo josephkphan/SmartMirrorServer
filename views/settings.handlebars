@@ -164,14 +164,16 @@
                                 <h4 class="title">Edit Profile</h4>
                             </div>
                             <div class="content">
-                                <form>
+                                <form method="post" action="/settings">
+                                    <input type="hidden" name="_id" value="{{user._id}}">
+
                                     <label>Google Maps Settings</label>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Avoid Tolls</label>
                                                 <select name="maps_settings_avoid_tolls">
-                                                    <option value="" disabled selected>Select your option</option>
+                                                    <option value="" disabled selected>"{{user.maps_settings_avoid_tolls}}"</option>
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>
                                                 </select>
@@ -182,8 +184,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Transit Mode</label>
-                                                <select name="maps_settings_avoid_tolls">
-                                                    <option value="" disabled selected>Select your option</option>
+                                                <select name="maps_settings_transit_mode">
+                                                    <option value="" disabled selected>"{{user.maps_settings_transit_mode}}"</option>
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>
                                                 </select>
@@ -194,8 +196,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Mode Mode</label>
-                                                <select name="maps_settings_avoid_tolls">
-                                                    <option value="" disabled selected>Select your option</option>
+                                                <select name="maps_settings_mode">
+                                                    <option value="" disabled selected>"{{user.maps_settings_mode}}"</option>
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>
                                                 </select>
@@ -207,8 +209,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Font Size</label>
-                                                <select name="maps_settings_avoid_tolls">
-                                                    <option value="" disabled selected>Select your option</option>
+                                                <select name="fontSize">
+                                                    <option value="" disabled selected>"{{user.fontSize}}"</option>
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>
                                                 </select>
@@ -219,8 +221,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Font Color</label>
-                                                <select name="maps_settings_avoid_tolls">
-                                                    <option value="" disabled selected>Select your option</option>
+                                                <select name="color">
+                                                    <option value="" disabled selected>"{{user.color}}"</option>
                                                     <option value="yes">Yes</option>
                                                     <option value="no">No</option>
                                                 </select>
