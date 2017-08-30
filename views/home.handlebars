@@ -53,7 +53,7 @@
             <ul class="nav">
                 <li class="active">
                     <a href="">
-                        <i class="pe-7s-"></i>
+                        <i class="pe-7s-home"></i>
                         <p>Home</p>
                     </a>
                 </li>
@@ -145,7 +145,7 @@
                               </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="users/logout">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -155,247 +155,63 @@
             </div>
         </nav>
 
+        <form method="post" action="/home">
+            <!-- Need to pass the user's ID to the form that will be posted -->
+            <input type="hidden" name="_id" value="{{user._id}}">
+            <div class="content">
+                <div class="container-fluid">
 
-        <div class="content">
-            <div class="container-fluid">
-
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">Stocks</h4>
-                                <p class="category">Backend development</p>
-                            </div>
-                            <div class="content">
-                                <div class="table-full-width">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" value="" data-toggle="checkbox">
-                                                </label>
-                                            </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                </label>
-                                            </td>
-                                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                </label>
-                                            </td>
-                                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                            </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" value="" data-toggle="checkbox">
-                                                </label>
-                                            </td>
-                                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" value="" data-toggle="checkbox">
-                                                </label>
-                                            </td>
-                                            <td>Read "Following makes Medium better"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <label class="checkbox">
-                                                    <input type="checkbox" value="" data-toggle="checkbox">
-                                                </label>
-                                            </td>
-                                            <td>Unfollow 5 enemies from twitter</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                    <i class="fa fa-edit"></i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">Stocks</h4>
+                                    <p class="category">Backend development</p>
                                 </div>
+                                <div class="content">
+                                    <div class="table-full-width">
+                                        <input type="hidden" name="stocks" id="stocks" value="{{user.stocks}}">
+                                        <table class="table">
+                                            <tbody id="stock_UL">
+                                            </tbody>
+                                        </table>
+                                        <input type="text" id="stock_input" placeholder="Title...">
+                                        <span onclick="newStockElement()" class="btn btn-info btn-fill pull-right">Add</span>
+                                    </div>
 
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    <div class="footer">
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6">
-                        <div class="card ">
-                            <div class="header">
-                                <h4 class="title">Reminders</h4>
-                                <p class="category">Backend development</p>
-                            </div>
-                            <div class="content">
-                                <div class="table-full-width">
-                                    <table class="table">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                    </label>
-                                                </td>
-                                                <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
-                                                    </label>
-                                                </td>
-                                                <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Read "Following makes Medium better"</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <label class="checkbox">
-                                                        <input type="checkbox" value="" data-toggle="checkbox">
-                                                    </label>
-                                                </td>
-                                                <td>Unfollow 5 enemies from twitter</td>
-                                                <td class="td-actions text-right">
-                                                    <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
-                                                        <i class="fa fa-edit"></i>
-                                                    </button>
-                                                    <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
-                                                        <i class="fa fa-times"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">Reminders</h4>
+                                    <p class="category">Backend development</p>
                                 </div>
+                                <div class="content">
+                                    <div class="table-full-width">
+                                        <input type="hidden" name="to_do_list" id="to_do_list" value="{{user.to_do_list}}">
+                                        <table class="table">
+                                            <tbody id = "todo_UL">
 
-                                <div class="footer">
-                                    <hr>
-                                    <div class="stats">
-                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                            </tbody>
+                                        </table>
+                                        <input type="text" id="todo_input" placeholder="Title...">
+                                        <span onclick="newToDoElement()" class="btn btn-info btn-fill pull-right">Add</span>
+                                    </div>
+
+                                    <div class="footer">
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -403,10 +219,7 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-
-        <form method="post" action="/">
             <button type="submit" class="btn btn-info btn-fill pull-right">Update Lists</button>
             <div class="clearfix"></div>
         </form>
@@ -464,5 +277,238 @@
 
     	});
 	</script>
+
+    <!--These scripts will be used to add list items to "STOCKS" and "stocks"-->
+    <script>
+        // Variable for all close buttons
+        var close = document.getElementsByClassName("close");
+
+        // Create list of existing to do items
+        var prev_stocks = document.getElementById("stocks").value.split("////");
+        console.log('Prev Stocks:',prev_stocks)
+        prev_stocks.forEach(function(stock) {
+            newStockElement(stock);
+            console.log(stock);
+        });
+
+        // Create a new list item when clicking on the "Add" button
+        function newStockElement(string) {
+            console.log(close.length);
+
+            var inputValue;
+
+            // Check to see if an input value is being passed to this function
+            if (string) {
+                inputValue = string;  // Create Todo list from Database
+            } else {
+                console.log('FROM BUTTON')
+
+                inputValue = document.getElementById("stock_input").value;  // Added from the UI
+                if (document.getElementById("stocks").value  == '') {
+                    document.getElementById("stocks").value += ( inputValue);  // First one cannot have "////"  i.e.   a////b////c
+                } else {
+                    document.getElementById("stocks").value += ('////' + inputValue);
+                }
+            }
+            console.log('ADD STRING TO DB:',document.getElementById("stocks").value)
+
+            if (inputValue === '') {
+                console.log('No Input')
+                return
+            }
+
+            console.log('INPUT VALUE: ',inputValue)
+
+            // Create the Stock text values in the table
+            var input = document.createTextNode(inputValue);
+
+            var td1 = document.createElement("td");
+            td1.appendChild(input);
+
+            // Create the button accompanying Stock text
+            var td2 = document.createElement("td");
+            td2.className = "td-actions text-right";
+            var removeButton = document.createElement("button");
+            removeButton.typeName = "button";
+            removeButton.relName = "tooltip";
+            removeButton.titleName = "Remove";
+            removeButton.className = "btn btn-danger btn-simple btn-xs close";
+            var i = document.createElement("i");
+            i.className = "fa fa-times";
+            removeButton.appendChild(i);
+            td2.appendChild(removeButton);
+
+            // Append the text and the button to the table row
+            var tr = document.createElement("tr");
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+
+            document.getElementById("stock_UL").appendChild(tr);
+
+            document.getElementById("stock_input").value = "";  // Clear the input
+
+            // Remove the item from the list when clicked
+            console.log(close.length);
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    // Make the HTML element disappear
+                    var removeTR = this.parentElement.parentElement;
+                    var removed_string = removeTR.innerHTML.split("td>")[1];
+                    removed_string = removed_string.split("<")[0]; //this is used to update the database
+                    console.log(removed_string)
+
+
+                    console.log('DIV:',removeTR)
+                    removeTR.style.display = "none"
+//                    div.style.display = "none"; // This is what Removes it visually from the html
+                    // Retrieve the current list of elements from the database
+
+
+
+                    var prev_stocks = document.getElementById("stocks").value
+
+                    if(String(prev_stocks).indexOf('////') === -1){
+                        prev_stocks = '';
+                    }else{
+                        prev_stocks = prev_stocks.split("////");
+                        // Recreate the list of current elements but do not include item to be removed
+                        document.getElementById("stocks").value = '';
+                        prev_stocks.forEach(function (stock) {
+                            if (stock !== removed_string) {
+                                if (document.getElementById("stocks").value == '') {
+                                    document.getElementById("stocks").value += (stock);  // First one cannot have "////"  i.e.   a////b////c
+                                } else {
+                                    document.getElementById("stocks").value += ('////' + stock);
+
+                                }
+                            }
+                        });
+                    }
+                    console.log('REMOVE STRING TO DB:',document.getElementById("stocks").value)
+                }
+            }
+        }
+
+        // ------------------------------------------------ Todo ---------------------------------------------------- //
+
+        // Create a new list item when clicking on the "Add" button
+        function newToDoElement(string) {
+            console.log(close.length);
+
+            var inputValue;
+
+            // Check to see if an input value is being passed to this function
+            if (string) {
+                inputValue = string;  // Create Todo list from Database
+            } else {
+                console.log('FROM BUTTON')
+
+                inputValue = document.getElementById("todo_input").value;  // Added from the UI
+                if (document.getElementById("to_do_list").value  == '') {
+                    document.getElementById("to_do_list").value += ( inputValue);  // First one cannot have "////"  i.e.   a////b////c
+                } else {
+                    document.getElementById("to_do_list").value += ('////' + inputValue);
+                }
+            }
+
+
+            if (inputValue === '') {
+                console.log('No Input')
+                return
+            }
+
+            console.log('INPUT VALUE: ',inputValue)
+
+            // Create the todo text values in the table
+            var input = document.createTextNode(inputValue);
+
+            var td1 = document.createElement("td");
+            td1.appendChild(input);
+
+            // Create the button accompanying todo text
+
+            var td2 = document.createElement("td");
+            td2.className = "td-actions text-right";
+            var editButton = document.createElement("button");
+            editButton.typeName = "button";
+            editButton.relName = "tooltip";
+            editButton.titleName = "Edit Task";
+            editButton.className = "btn btn-info btn-simple btn-xs close";
+            var i = document.createElement("i");
+            i.className = "fa fa-edit";
+            editButton.appendChild(i);
+            td2.appendChild(editButton);
+
+
+
+            var checkbox_label = document.createElement("label");
+            checkbox_label.className = "checkbox"
+
+            var checkbox_input_type = document.createElement("input");  //TODO <-- potential error if it create <input></input>
+//            checkbox_input_type.type = "checkbox";
+//            checkbox_input_type.value = "";
+
+//            var attr = document.createAttribute('data-toggle');
+//            attr.value = "checkbox"
+
+            checkbox_input_type.setAttribute('type','checkbox');
+            checkbox_input_type.setAttribute('data-toggle','checkbox');
+            checkbox_input_type.setAttribute('value',' ');
+            checkbox_input_type.setAttribute('checked',' ');
+
+//            checkbox_input_type['data-toggle']="checkbox"; //TODO FINISH THIS - DATA TOGGLE FKED US UP LAST WEEK
+//            checkbox_input_type.checked = "";
+
+            checkbox_label.appendChild(checkbox_input_type);
+
+
+            var td3 = document.createElement("td");
+            td3.appendChild(checkbox_label);
+//
+
+            // Append the text and the button to the table row
+            var tr = document.createElement("tr");
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            tr.appendChild(td3);
+
+            document.getElementById("todo_UL").appendChild(tr);
+
+            document.getElementById("todo_input").value = "";  // Clear the input
+
+            // Remove the item from the list when clicked
+            console.log(close.length);
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function () {
+                    // Make the HTML element disappear
+                    var removeTR = this.parentElement.parentElement;
+                    var removed_string = removeTR.innerHTML.split("td>")[1];
+                    removed_string = removed_string.split("<")[0]; //this is used to update the database
+                    console.log(removed_string)
+
+
+                    console.log('DIV:',removeTR)
+                    removeTR.style.display = "none"
+//                    div.style.display = "none"; // This is what Removes it visually from the html
+                    // Retrieve the current list of elements from the database
+
+
+
+                    var prev_todo = document.getElementById("to_do_list").value.split("////");
+                    // Recreate the list of current elements but do not include item to be removed
+                    document.getElementById("to_do_list").value = '';
+                    prev_todo.forEach(function(todo) {
+                        if(todo !== removed_string){
+                            if (document.getElementById("todo").value == ''){
+                                document.getElementById("todo").value += (todo);  // First one cannot have "////"  i.e.   a////b////c
+                            } else {
+                                document.getElementById("todo").value += ('////' + todo);
+                            }
+                        }
+                    });
+                }
+            }
+        }
+    </script>
 
 </html>

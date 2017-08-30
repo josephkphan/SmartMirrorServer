@@ -81,8 +81,9 @@ module.exports.updateUser = function (body) {
             updates[key] = body[key]
         }
         if (counter >= size) {
+            console.log('Query: '+util.inspect(query, false, null))
             User.findOneAndUpdate(query, updates, function (error, doc) {
-                console.log('Update: '+util.inspect(body, false, null));
+                console.log('Updates: '+util.inspect(updates, false, null));
                 if (error) {
                     console.log('Update Err: ' + err);
                 }

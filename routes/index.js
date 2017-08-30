@@ -14,6 +14,7 @@ router.get('/', ensureAuthenticated, function(req, res){
 router.post('/', function(req, res) {
     req.flash('success_msg', 'Updated Profile');
     res.redirect('/');
+
     User.updateUser(req.body);
 
 });
@@ -26,9 +27,10 @@ router.get('/home', ensureAuthenticated, function(req, res){
 
 router.post('/home', function(req, res) {
     req.flash('success_msg', 'Updated Stocks & Reminders');
-    res.redirect('/home');
     console.log('** Post Home Page');
+    console.log('POST: Update STOCK/REM: ', req.body)
     User.updateUser(req.body);
+    res.redirect('/home');
 });
 
 //User
