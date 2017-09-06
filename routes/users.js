@@ -139,6 +139,7 @@ passport.use(new FacebookStrategy({
 					newUser.facebook.token = accessToken;
 					newUser.facebook.name = profile.displayName+ ' ' + profile.name.familyName;
 					newUser.name = profile.displayName+ ' ' + profile.name.familyName;
+					console.log(profile); //TODO
 
 					User.createUser(newUser, function(err, user){
 						if(err) throw err;
