@@ -126,18 +126,21 @@
 <!-- Form Module-->
 <div class="module form-module">
 
-    <div class="form"> </div>
+    <div class="form"></div>
     <!--DON'T DELETE THE DIV ABOVE. IS CRITICAL TO THIS PAGE-->
     <div class="form">
         <h2>Create an account</h2>
-        <form method="post" action="/users/login">
+        <form method="post" action="/users/register">
+            <input name="name" type="text" placeholder="Name"/>
             <input name="username" type="text" placeholder="Username"/>
             <input name="password" type="password" placeholder="Password"/>
-            <button class="button" type=submit">Login</button>
+            <input name="password2" type="password" placeholder="Retype Password"/>
+            <input name="mirrorID" type="text" placeholder="MirrorID"/>
+            <input name="email" type="email" placeholder="Email Address"/>
+            <button class="button">Register</button>
         </form>
     </div>
-    <div class="cta"><a href="register">Forgot your password?</a></div>
-    <div class="cta"><a href="register">Register Here</a></div>
+    <div class="cta"><a href="login">Already have an account?</a></div>
 
 </div>
 

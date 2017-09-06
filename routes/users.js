@@ -10,7 +10,7 @@ var configAuth = require('../config/auth');
 
 // Register
 router.get('/register', function(req, res){
-	res.render('login');
+	res.render('register');
 });
 
 // Login

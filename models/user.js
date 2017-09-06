@@ -76,7 +76,8 @@ module.exports.updateUser = function (body) {
     Object.keys(body).forEach(function (key) {
         counter++;
         console.log(counter);
-        if (body[key] !== '') {             //TODO remove console logs
+        //If the field in the form is empty, ignore the value UNLESS it is the todolist or stocks
+        if (body[key] !== '' || key==='to_do_list' || key==='stocks') {             //TODO remove console logs
             console.log(key+ ':['+body[key]+']');
             updates[key] = body[key]
         }
