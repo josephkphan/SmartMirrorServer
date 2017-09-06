@@ -188,25 +188,16 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Name</label>
+                                                <input type="text" class="form-control" placeholder="{{user.name}}" name="name">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Mirror ID</label>
                                                 <input type="text" class="form-control" placeholder="{{user.mirrorID}}" name="mirrorID">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>First Name</label>
-                                                <input type="text" class="form-control" placeholder="{{user.firstname}}" name="firstname">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>Last Name</label>
-                                                <input type="text" class="form-control" placeholder="{{user.lastname}}" name="lastname">
                                             </div>
                                         </div>
                                     </div>
@@ -229,14 +220,14 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Country</label>
+                                                <label>State</label>
                                                 <input type="text" class="form-control" placeholder="{{user.maps_origin_state_address}}" name="maps_origin_state_address">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label>Postal Code</label>
-                                                <input type="number" class="form-control" placeholder="{{user.maps_origin_zipcode_address}}" name="maps_origin_zipcode_address">
+                                                <label>Country</label>
+                                                <input type="text" class="form-control" placeholder="{{user.maps_origin_country_address}}" name="maps_origin_country_address">
                                             </div>
                                         </div>
                                     </div>
@@ -245,7 +236,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>About Me</label>
-                                                <textarea rows="5" class="form-control" placeholder="Here can be your description" value=""></textarea>
+                                                <textarea rows="5" class="form-control" placeholder="{{user.about_me}}" value="" name="about_me"></textarea>
                                             </div>
                                         </div>
                                     </div>

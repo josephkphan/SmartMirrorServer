@@ -34,58 +34,36 @@ failureRedirect: '/login' }));
 // Register User
 router.post('/register', function(req, res){
 	var name = req.body.name;
-	var mirrorID = req.body.mirrorID;
+	var email = req.body.email;
 	var username = req.body.username;
 	var password = req.body.password;
 	var password2 = req.body.password2;
+	var mirrorID = req.body.mirrorID;
 
 	// Validation - Checks if user filled out the form correctly
 	req.checkBody('name', 'Name is required').notEmpty();
-	req.checkBody('mirrorID', 'MirrorID is required').notEmpty();
+	req.checkBody('email', 'Email is required').notEmpty();
 	req.checkBody('username', 'Username is required').notEmpty();
 	req.checkBody('password', 'Password is required').notEmpty();
 	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-	// checks to make sure passwords match and all fields are filled in
+	req.checkBody('mirrorID', 'MirrorID is required').notEmpty();
 
 	var errors = req.validationErrors();
 
 	if(errors){
-		res.render('login',{
+		res.render('login', {
 			// shows the errors
-
 			errors:errors
 		});
 	} else {
 		// account created successful! creating new user data structure
 		var newUser = new User({
-			name: name,
-			mirrorID:mirrorID,
+			// General Information
 			username: username,
 			password: password,
-
-            google_distance_matrix_key: 'google_distance_matrix_key',
-            google_geocode_key: 'google_geocode_key',
-            dark_sky_weather_key: 'dark_sky_weather_key',
-
-            maps_origin_street_address : 'street',
-            maps_origin_city_address : 'city',
-            maps_origin_state_address : 'state initials',
-
-            maps_destination_street_address : 'street',
-            maps_destination_city_address : 'city',
-            maps_destination_state_address : 'state initials',
-
-            maps_settings_avoid_tolls : false,
-            maps_settings_mode : String,
-            maps_settings_transit_mode : String,
-
-            color: 'yellow',    //TODO This should be the default value?
-            fontSize: 'medium',  //TODO Same? ^
-
-			to_do_list: 'a////b////c',
-			stocks: ''
-
-			//TODO Make this the default for facebook and other one too
+			email: email,
+			name: name,
+			mirrorID: mirrorID
 		});
 
 		User.createUser(newUser, function(err, user){
@@ -173,7 +151,7 @@ passport.use(new FacebookStrategy({
 	}
 ));
 
-// Google Logn
+// Google Login
 passport.use(new GoogleStrategy({
 	// Get the API Keys
 	clientID: configAuth.googleAuth.clientID,
