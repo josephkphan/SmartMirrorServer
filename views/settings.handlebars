@@ -174,8 +174,8 @@
                                                 <label>Avoid Tolls</label>
                                                 <select name="maps_settings_avoid_tolls">
                                                     <option value="" disabled selected>"{{user.maps_settings_avoid_tolls}}"</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="true">True</option>
+                                                    <option value="false">False</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -186,8 +186,10 @@
                                                 <label>Transit Mode</label>
                                                 <select name="maps_settings_transit_mode">
                                                     <option value="" disabled selected>"{{user.maps_settings_transit_mode}}"</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="bus">Bus</option>
+                                                    <option value="subway">Subway</option>
+                                                    <option value="tram">Tram</option>
+                                                    <option value="rail">Rail</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -195,11 +197,13 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Mode Mode</label>
+                                                <label>Travel Mode</label>
                                                 <select name="maps_settings_mode">
                                                     <option value="" disabled selected>"{{user.maps_settings_mode}}"</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="driving">Driving</option>
+                                                    <option value="walking">Walking</option>
+                                                    <option value="bicycling">Bicycling</option>
+                                                    <option value="transit">Transit</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -211,8 +215,9 @@
                                                 <label>Font Size</label>
                                                 <select name="fontSize">
                                                     <option value="" disabled selected>"{{user.fontSize}}"</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="small">Small</option>
+                                                    <option value="medium">Medium</option>
+                                                    <option value="large">Large</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -223,8 +228,13 @@
                                                 <label>Font Color</label>
                                                 <select name="color">
                                                     <option value="" disabled selected>"{{user.color}}"</option>
-                                                    <option value="yes">Yes</option>
-                                                    <option value="no">No</option>
+                                                    <option value="blue">Blue</option>
+                                                    <option value="green">Green</option>
+                                                    <option value="orange">Orange</option>
+                                                    <option value="pink">Pink</option>
+                                                    <option value="purple">Purple</option>
+                                                    <option value="red">Red</option>
+                                                    <option value="yellow">Yellow</option>
                                                 </select>
                                             </div>
                                         </div>
