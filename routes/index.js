@@ -15,20 +15,17 @@ router.post('/', function(req, res) {
     req.flash('success_msg', 'Updated Profile');
     res.redirect('/');
     User.updateUser(req.body);
-
 });
 
 //Home
 router.get('/home', ensureAuthenticated, function(req, res){
-    console.log('Load Home Page');
     res.render('home', req.user);
 });
 
 router.post('/home', function(req, res) {
     req.flash('success_msg', 'Updated Stocks & Reminders');
-    res.redirect('/home');
-    console.log('** Post Home Page');
     User.updateUser(req.body);
+    res.redirect('/home');
 });
 
 //User
@@ -82,7 +79,6 @@ router.post('/settings', function(req, res) {
     console.log('** Post Settings Page');
     res.redirect('/settings');
     User.updateUser(req.body);
-
 });
 
 // Support Page
