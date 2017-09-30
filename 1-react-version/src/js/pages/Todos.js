@@ -6,45 +6,53 @@ import TodoStore from "../stores/TodoStore";
 
 
 export default class Todos extends React.Component {
-  constructor() {
-    super();
-    this.getTodos = this.getTodos.bind(this);
-    this.state = {
-      todos: TodoStore.getAll(),
-    };
-  }
+    constructor() {
+        super();
+        this.getTodos = this.getTodos.bind(this);
+        this.state = {
+            todos: TodoStore.getAll(),
+            new_text: ''
+        };
+    }
 
-  componentWillMount() {
-    TodoStore.on("change", this.getTodos);
-  }
+    componentWillMount() {
+        TodoStore.on("change", this.getTodos);
+    }
 
-  componentWillUnmount() {
-    TodoStore.removeListener("change", this.getTodos);
-  }
+    componentWillUnmount() {
+        TodoStore.removeListener("change", this.getTodos);
+    }
 
-  getTodos() {
-    this.setState({
-      todos: TodoStore.getAll(),
-    });
-  }
+    getTodos() {
+        this.setState({
+            todos: TodoStore.getAll(),
+        });
+    }
 
-  reloadTodos() {
-    TodoActions.reloadTodos();
-  }
+    createTodo() {
+        console.log(this.state.new_text);
+        TodoActions.createTodo(this.state.new_text);
+        this.state.new_text = ''
+    }
 
-  render() {
-    const { todos } = this.state;
+    handleChange(event) {
+        this.setState({new_text: event.target.value});
+    }
 
-    const TodoComponents = todos.map((todo) => {
-        return <Todo key={todo.id} {...todo}/>;
-    });
+    render() {
+        const {todos} = this.state;
 
-    return (
-      <div>
-        <button onClick={this.reloadTodos.bind(this)}>Reload!</button>
-        <h1>Todos</h1>
-        <ul>{TodoComponents}</ul>
-      </div>
-    );
-  }
+        const TodoComponents = todos.map((todo) => {
+            return <Todo key={todo.id} {...todo}/>;
+        });
+
+        return (
+            <div>
+                <input type="text" value={this.state.new_text} onChange={this.handleChange.bind(this)} />
+                <button onClick={this.createTodo.bind(this)}>Add Reminder</button>
+                <h1>Todos</h1>
+                <ul>{TodoComponents}</ul>
+            </div>
+        );
+    }
 }
