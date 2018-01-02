@@ -20,14 +20,15 @@ var db = mongoose.connection;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var api = require('./routes/api');
 
 // Init App
 var app = express();
 
 // View Engine
-app.set('views', path.join(__dirname, 'views'));  // we want a folder views to handle our views
-app.engine('handlebars', exphbs({defaultLayout:'layout'})); //default layout file in layout
-app.set('view engine', 'handlebars'); //set viewengine to handlebars
+app.set('views', path.join(__dirname, 'views'));  // We want a folder views to handle our views
+app.engine('handlebars', exphbs({defaultLayout:'layout'})); // Default layout file in layout
+app.set('view engine', 'handlebars'); // Set view engine to handlebars
 
 // BodyParser Middleware   -  setup code, configurations
 app.use(bodyParser.json());
@@ -44,7 +45,7 @@ app.use(session({
     resave: true
 }));
 
-// Passport init
+// Passport Init
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -69,7 +70,7 @@ app.use(expressValidator({
 // Connect Flash
 app.use(flash());
 
-// Global Vars		- used for our flash messages
+// Global Vars - used for our flash messages
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
@@ -81,11 +82,12 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/api', api);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));
 
-//starting server
+// Starting Server
 app.listen(app.get('port'), function(){
 	console.log('Server started on port '+app.get('port'));
 });
