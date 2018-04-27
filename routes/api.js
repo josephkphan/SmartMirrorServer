@@ -29,7 +29,7 @@ router.get('/get_user_settings', function(req, res) {
 // router.post('/update_user_settings', function(req, res) {
 //     // Verify which user this is
 
-//     //
+//     // TEST
 // });
 
 
