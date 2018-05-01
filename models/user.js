@@ -148,3 +148,9 @@ module.exports.addToDoListItem = function (user, toDoListItem, callback) {
     user.toDo = toDoListItem;
     user.save(callback);
 };
+
+module.exports.updateMirrorPrefs = function (user, color, fontSize, callback) {
+    user.color = color;
+    user.fontSize = fontSize
+    user.save(callback);
+};

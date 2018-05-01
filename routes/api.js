@@ -13,7 +13,8 @@ router.get('/get_user_settings', function(req, res) {
     // Double check that correct arguments were passed
     if (!('username' in req.query) || !('mirrorID' in req.query)) {
         console.log("Invalid arguments passed to /get_user_settings request");
-        res.send("/get_user_settings Request Failed: Invalid Arguments")
+        res.send("/get_user_settings Request Failed: Invalid Arguments");
+        return;
     }
 
     // TODO: Don't get user by username, get user by Mirror ID ... If it doesn't exist, return error "web account not set up yet"
@@ -37,10 +38,11 @@ router.post('/update_user_settings', function(req, res) {
     // Double check that correct arguments were passed
     if (!('username' in req.query) || !('mirrorID' in req.query)) {
         console.log("Invalid arguments passed to /update_user_settings request");
-        res.send("/update_user_settings Request Failed: Invalid Arguments")
+        res.send("/update_user_settings Request Failed: Invalid Arguments");
+        return;
     }
 
-    // Get username info
+    // Get User Object based on their username
     User.getUserByUsername(req.query.username, function(err, user) {
         if(err) console.log(err);
 
@@ -54,8 +56,9 @@ router.post('/update_user_settings', function(req, res) {
         updates = req.body;
 
         // Update the schema for this user
-        // updates.color
-        // updates.fontSize
+        User.updateMirrorPrefs(user, updates.color, updates.fontSize, function (err, res) {
+            if (err) console.log(err);
+        });
 
         res.send('POST Request sent to update user settings');
     });
